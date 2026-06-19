@@ -1,20 +1,17 @@
 import streamlit as st
 
-# ─── PAGE CONFIG ─────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="n8n AI Agent Portfolio | Aravind Kumar",
+    page_title="Aravind Kumar Nalukurthi | AI Agent Portfolio",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
 
-# ─── GLOBAL CSS ──────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body, .stApp {
     background-color: #0A0F1E !important;
@@ -22,60 +19,202 @@ html, body, .stApp {
     color: #E2E8F0;
 }
 
-/* Hide Streamlit chrome */
-#MainMenu, footer, header, .stDeployButton { visibility: hidden; display: none; }
-.stDecoration { display: none; }
-[data-testid="stToolbar"] { display: none; }
+#MainMenu, footer, header, .stDeployButton { visibility: hidden !important; display: none !important; }
+[data-testid="stToolbar"] { display: none !important; }
+.stDecoration { display: none !important; }
+section[data-testid="stSidebar"] { display: none !important; }
+.block-container { padding: 0 !important; max-width: 100% !important; }
 
-/* Remove Streamlit default padding */
-.block-container {
-    padding: 0 !important;
-    max-width: 100% !important;
-}
-
-section[data-testid="stSidebar"] { display: none; }
-
-/* ── Animated hero background ── */
 @keyframes gradientShift {
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-8px); }
-}
-
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.3); }
-    50%       { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
 }
+
+/* ── Recruiter Profile Bar ── */
+.profile-bar {
+    background: linear-gradient(135deg, #0D1627 0%, #111827 100%);
+    border-bottom: 1px solid rgba(99,102,241,0.18);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+}
+
+.profile-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #6366F1, #06B6D4, #8B5CF6, #6366F1);
+    background-size: 200% 100%;
+    animation: gradientShift 4s linear infinite;
+}
+
+.profile-left { display: flex; flex-direction: column; gap: 4px; }
+
+.profile-name {
+    font-size: 20px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 1.5px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.profile-title-tag {
+    font-size: 12px;
+    color: #94A3B8;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-title-tag .sep { color: #334155; }
+
+.available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(34,197,94,0.10);
+    border: 1px solid rgba(34,197,94,0.25);
+    color: #4ADE80;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.av-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #22C55E;
+    animation: pulseDot 2s ease infinite;
+}
+
+.profile-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.p-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    min-height: 34px;
+    border: 1px solid transparent;
+}
+
+.p-link:active { transform: scale(0.94); }
+
+.p-link-li {
+    background: rgba(10,102,194,0.15);
+    border-color: rgba(10,102,194,0.35);
+    color: #60A5FA !important;
+}
+.p-link-li:hover { background: rgba(10,102,194,0.28); border-color: rgba(10,102,194,0.6); }
+
+.p-link-gh {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+    color: #CBD5E1 !important;
+}
+.p-link-gh:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.22); }
+
+.p-link-pf {
+    background: rgba(139,92,246,0.12);
+    border-color: rgba(139,92,246,0.3);
+    color: #C4B5FD !important;
+}
+.p-link-pf:hover { background: rgba(139,92,246,0.22); border-color: rgba(139,92,246,0.5); }
+
+.p-link-em {
+    background: rgba(6,182,212,0.10);
+    border-color: rgba(6,182,212,0.25);
+    color: #67E8F9 !important;
+}
+.p-link-em:hover { background: rgba(6,182,212,0.20); border-color: rgba(6,182,212,0.45); }
+
+.p-link-ph {
+    background: rgba(34,197,94,0.08);
+    border-color: rgba(34,197,94,0.2);
+    color: #86EFAC !important;
+    font-family: 'JetBrains Mono', monospace;
+}
+.p-link-ph:hover { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); }
 
 /* ── Hero ── */
 .hero-wrap {
-    background: linear-gradient(135deg, #0A0F1E 0%, #0D1B3E 35%, #0F172A 65%, #0A0F1E 100%);
+    background: linear-gradient(135deg, #0A0F1E 0%, #0D1B3E 40%, #0A0F1E 100%);
     background-size: 300% 300%;
-    animation: gradientShift 12s ease infinite;
-    padding: 72px 40px 56px;
+    animation: gradientShift 14s ease infinite;
+    padding: 56px 40px 52px;
     text-align: center;
+    border-bottom: 1px solid rgba(99,102,241,0.12);
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid rgba(99,102,241,0.12);
 }
 
+/* ── Summary section ── */
+.hero-summary-wrap {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    background: rgba(99,102,241,0.05);
+    border: 1px solid rgba(99,102,241,0.15);
+    border-radius: 14px;
+    padding: 20px 28px;
+    animation: fadeInUp 0.6s ease 0.15s both;
+}
+
+.hero-summary-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6366F1;
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.hero-summary-text {
+    font-size: 15px;
+    color: #CBD5E1;
+    line-height: 1.75;
+    font-weight: 400;
+}
+
+.hero-summary-text strong {
+    color: #E2E8F0;
+    font-weight: 600;
+}
 .hero-wrap::before {
     content: '';
     position: absolute; inset: 0;
     background:
         radial-gradient(ellipse 60% 40% at 20% 20%, rgba(99,102,241,0.10) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 35% at 80% 80%, rgba(6,182,212,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 60% 10%, rgba(139,92,246,0.06) 0%, transparent 70%);
+        radial-gradient(ellipse 50% 35% at 80% 80%, rgba(6,182,212,0.07) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -93,106 +232,72 @@ section[data-testid="stSidebar"] { display: none; }
     margin-bottom: 24px;
     animation: fadeInUp 0.6s ease both;
 }
-
 .hero-title {
-    font-size: clamp(32px, 5vw, 68px);
+    font-size: clamp(30px, 5vw, 66px);
     font-weight: 900;
     line-height: 1.05;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #67E8F9 75%, #A5F3FC 100%);
+    background: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #67E8F9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: fadeInUp 0.6s ease 0.1s both;
     letter-spacing: -1px;
+    animation: fadeInUp 0.6s ease 0.1s both;
 }
-
 .hero-subtitle {
-    font-size: 17px;
+    font-size: 16px;
     color: #94A3B8;
-    max-width: 560px;
-    margin: 0 auto 48px;
+    max-width: 540px;
+    margin: 0 auto 44px;
     line-height: 1.75;
-    font-weight: 400;
     animation: fadeInUp 0.6s ease 0.2s both;
 }
-
 .tech-badges {
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin-bottom: 44px;
     animation: fadeInUp 0.6s ease 0.3s both;
 }
-
 .tech-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.08);
     color: #94A3B8;
-    padding: 6px 14px;
+    padding: 7px 14px;
     border-radius: 8px;
     font-size: 12px;
     font-weight: 500;
     font-family: 'JetBrains Mono', monospace;
 }
-
-.tech-badge .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #6366F1;
-}
+.tb-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
 .hero-stats {
     display: flex;
     justify-content: center;
-    gap: 0;
-    animation: fadeInUp 0.6s ease 0.4s both;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 16px;
-    overflow: hidden;
-    max-width: 540px;
+    max-width: 500px;
     margin: 0 auto;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
     background: rgba(255,255,255,0.02);
+    animation: fadeInUp 0.6s ease 0.4s both;
 }
-
-.stat-box {
-    flex: 1;
-    padding: 20px 16px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.07);
-}
-
+.stat-box { flex: 1; padding: 20px 16px; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
 .stat-box:last-child { border-right: none; }
+.stat-num { font-size: 30px; font-weight: 900; line-height: 1; margin-bottom: 6px; display: block; }
+.stat-lbl { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #475569; display: block; }
 
-.stat-num {
-    font-size: 32px;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 6px;
-    display: block;
-}
-
-.stat-lbl {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #475569;
-    display: block;
-}
-
-/* ── Streamlit Tabs Override ── */
+/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     background: transparent !important;
     border-bottom: 1px solid rgba(255,255,255,0.07) !important;
     padding: 0 40px !important;
     gap: 4px !important;
 }
-
 .stTabs [data-baseweb="tab"] {
     background: transparent !important;
     color: #64748B !important;
@@ -204,34 +309,20 @@ section[data-testid="stSidebar"] { display: none; }
     border: none !important;
     border-bottom: 2px solid transparent !important;
     margin-bottom: -1px !important;
-    transition: color 0.2s, border-color 0.2s !important;
+    transition: color 0.2s !important;
 }
-
-.stTabs [data-baseweb="tab"]:hover {
-    color: #CBD5E1 !important;
-    background: rgba(255,255,255,0.02) !important;
-}
-
+.stTabs [data-baseweb="tab"]:hover { color: #CBD5E1 !important; }
 .stTabs [aria-selected="true"] {
     color: #E2E8F0 !important;
     border-bottom: 2px solid #6366F1 !important;
     background: transparent !important;
 }
-
-.stTabs [data-baseweb="tab-panel"] {
-    background: transparent !important;
-    padding: 0 !important;
-}
-
-.stTabs [data-baseweb="tab-highlight"] { display: none !important; }
+.stTabs [data-baseweb="tab-panel"] { background: transparent !important; padding: 0 !important; }
+.stTabs [data-baseweb="tab-highlight"],
 .stTabs [data-baseweb="tab-border"] { display: none !important; }
 
-/* ── Domain Section Header ── */
-.domain-header {
-    padding: 48px 40px 0;
-    animation: fadeInUp 0.4s ease both;
-}
-
+/* Domain section */
+.domain-wrap { padding: 40px 40px 60px; animation: fadeInUp 0.4s ease both; }
 .domain-tag {
     display: inline-block;
     font-size: 10px;
@@ -242,33 +333,13 @@ section[data-testid="stSidebar"] { display: none; }
     border-radius: 4px;
     margin-bottom: 12px;
 }
+.domain-title { font-size: 26px; font-weight: 800; color: #F1F5F9; margin-bottom: 8px; letter-spacing: -0.5px; }
+.domain-desc { font-size: 14px; color: #64748B; line-height: 1.7; max-width: 680px; margin-bottom: 32px; }
 
-.domain-title {
-    font-size: 28px;
-    font-weight: 800;
-    color: #F1F5F9;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-}
+/* Card grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-.domain-desc {
-    font-size: 14px;
-    color: #64748B;
-    line-height: 1.7;
-    max-width: 680px;
-    margin-bottom: 32px;
-}
-
-/* ── Agent Cards Grid ── */
-.agents-row {
-    padding: 0 40px 64px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    animation: fadeInUp 0.5s ease 0.1s both;
-}
-
-/* ── Agent Card ── */
+/* Agent card */
 .agent-card {
     background: rgba(255,255,255,0.025);
     border: 1px solid rgba(255,255,255,0.07);
@@ -278,30 +349,17 @@ section[data-testid="stSidebar"] { display: none; }
     display: flex;
     flex-direction: column;
 }
-
 .agent-card:hover {
     transform: translateY(-5px);
     border-color: rgba(255,255,255,0.14);
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
-
-/* Card header per domain */
-.card-header {
+.card-hdr {
     padding: 22px 22px 20px;
     position: relative;
     overflow: hidden;
 }
-
-.card-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: rgba(0,0,0,0.25);
-}
-
-/* Subtle grid pattern on card header */
-.card-header::before {
+.card-hdr::before {
     content: '';
     position: absolute; inset: 0;
     background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
@@ -309,304 +367,278 @@ section[data-testid="stSidebar"] { display: none; }
     background-size: 20px 20px;
     pointer-events: none;
 }
-
-.card-id {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.65;
-    margin-bottom: 8px;
-    position: relative;
+.card-hdr::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 1px;
+    background: rgba(0,0,0,0.25);
 }
-
-.card-name {
-    font-size: 17px;
-    font-weight: 700;
-    color: #FFFFFF;
-    line-height: 1.3;
-    margin-bottom: 14px;
-    position: relative;
-}
-
-.trigger-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.6);
-    position: relative;
-}
-
-.trigger-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: #22C55E;
-    animation: pulseGlow 2s ease infinite;
-}
+.card-id { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; position: relative; }
+.card-name { font-size: 17px; font-weight: 700; color: #FFFFFF; line-height: 1.3; margin-bottom: 14px; position: relative; }
+.trigger-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); position: relative; }
+.t-dot { width: 5px; height: 5px; border-radius: 50%; background: #22C55E; animation: pulseDot 2s ease infinite; }
 
 /* Card body */
-.card-body {
-    padding: 20px 22px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+.card-body { padding: 20px 22px; flex: 1; display: flex; flex-direction: column; }
+.xyz-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.xyz-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; min-width: 62px; text-align: center; flex-shrink: 0; margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.lp { background: rgba(239,68,68,0.12); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.2); }
+.lb { background: rgba(99,102,241,0.12); color: #A5B4FC; border: 1px solid rgba(99,102,241,0.2); }
+.ls { background: rgba(34,197,94,0.12); color: #86EFAC; border: 1px solid rgba(34,197,94,0.2); }
+.xyz-txt { font-size: 12.5px; color: #CBD5E1; line-height: 1.65; }
 
-/* XYZ section */
-.xyz-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 10px;
-}
-
-.xyz-label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    min-width: 64px;
-    text-align: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.label-p { background: rgba(239,68,68,0.12);  color: #FCA5A5; border: 1px solid rgba(239,68,68,0.2); }
-.label-b { background: rgba(99,102,241,0.12); color: #A5B4FC; border: 1px solid rgba(99,102,241,0.2); }
-.label-s { background: rgba(34,197,94,0.12);  color: #86EFAC; border: 1px solid rgba(34,197,94,0.2); }
-
-.xyz-text {
-    font-size: 12.5px;
-    color: #CBD5E1;
-    line-height: 1.65;
-    font-weight: 400;
-}
-
-/* Divider */
-.card-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.05);
-    margin: 16px 0;
-}
-
-/* Workflow diagram */
-.workflow-box {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: #64748B;
-    line-height: 1.9;
-    overflow-x: auto;
-    white-space: pre;
-}
-
-/* Use cases */
-.uc-title {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #475569;
-    margin-bottom: 10px;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.uc-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 7px;
-}
-
-.uc-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    margin-top: 6px;
-    flex-shrink: 0;
-}
-
-.uc-text {
-    font-size: 12px;
-    color: #94A3B8;
-    line-height: 1.55;
-}
-
+.card-div { height: 1px; background: rgba(255,255,255,0.05); margin: 14px 0; }
+.wf-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #475569; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
+.uc-title { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #475569; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; margin-top: 14px; }
+.uc-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; }
+.uc-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+.uc-txt { font-size: 12px; color: #94A3B8; line-height: 1.55; }
 .uc-co { font-weight: 600; color: #CBD5E1; }
+.metrics-row { display: flex; gap: 8px; margin-top: auto; padding-top: 14px; }
+.m-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #64748B; font-family: 'JetBrains Mono', monospace; flex: 1; text-align: center; }
+.m-val { display: block; font-size: 14px; font-weight: 700; color: #CBD5E1; margin-bottom: 2px; }
+.n8n-btn { display: block; text-align: center; padding: 11px 20px; border-radius: 9px; font-size: 13px; font-weight: 600; text-decoration: none; margin-top: 14px; color: white !important; transition: opacity 0.2s; min-height: 44px; line-height: 22px; }
+.n8n-btn:hover { opacity: 0.85; color: white !important; text-decoration: none !important; }
 
-/* Metrics row */
-.metrics-row {
-    display: flex;
-    gap: 8px;
-    margin-top: auto;
-    padding-top: 16px;
-}
+/* Domain color themes */
+.hc-hdr { background: linear-gradient(135deg, #0C4A6E 0%, #134E4A 100%); }
+.hc-id { color: #67E8F9; }
+.hc-tag { background: rgba(6,182,212,0.12); color: #67E8F9; border: 1px solid rgba(6,182,212,0.25); }
+.hc-ttl { color: #67E8F9; }
+.hc-dot { background: #06B6D4; }
+.hc-btn { background: linear-gradient(135deg, #0369A1, #0F766E); }
+.hc-val { color: #67E8F9; }
 
-.metric-chip {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 11px;
-    color: #64748B;
-    font-family: 'JetBrains Mono', monospace;
-    flex: 1;
-    text-align: center;
-}
+.tr-hdr { background: linear-gradient(135deg, #7C2D12 0%, #78350F 100%); }
+.tr-id { color: #FDBA74; }
+.tr-tag { background: rgba(249,115,22,0.12); color: #FDBA74; border: 1px solid rgba(249,115,22,0.25); }
+.tr-ttl { color: #FDBA74; }
+.tr-dot { background: #F97316; }
+.tr-btn { background: linear-gradient(135deg, #C2410C, #B45309); }
+.tr-val { color: #FDBA74; }
 
-.metric-chip span { display: block; }
-.metric-val { color: #CBD5E1; font-weight: 600; font-size: 13px; }
+.cn-hdr { background: linear-gradient(135deg, #3B1702 0%, #2E1065 100%); }
+.cn-id { color: #FDE68A; }
+.cn-tag { background: rgba(234,179,8,0.12); color: #FDE68A; border: 1px solid rgba(234,179,8,0.25); }
+.cn-ttl { color: #FDE68A; }
+.cn-dot { background: #EAB308; }
+.cn-btn { background: linear-gradient(135deg, #92400E, #5B21B6); }
+.cn-val { color: #FDE68A; }
 
-/* n8n Link Button */
-.n8n-btn {
-    display: block;
-    text-align: center;
-    padding: 11px 20px;
-    border-radius: 9px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    margin-top: 14px;
-    color: white;
-    transition: opacity 0.2s, transform 0.15s;
-    letter-spacing: 0.2px;
-}
+/* Footer */
+.portfolio-footer { background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.05); padding: 40px; text-align: center; }
+.footer-repos { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.repo-link { display: inline-block; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 16px; font-size: 12px; font-weight: 500; color: #94A3B8 !important; text-decoration: none !important; font-family: 'JetBrains Mono', monospace; transition: all 0.2s; }
+.repo-link:hover { background: rgba(255,255,255,0.07); color: #E2E8F0 !important; }
+.footer-credit { font-size: 13px; color: #475569; }
+.footer-credit a { color: #6366F1 !important; text-decoration: none; font-weight: 500; }
 
-.n8n-btn:hover { opacity: 0.87; transform: translateY(-1px); }
-
-/* ──── Domain Color Themes ──── */
-
-/* Healthcare: Cyan + Teal */
-.hc-header  { background: linear-gradient(135deg, #0C4A6E 0%, #134E4A 100%); }
-.hc-id      { color: #67E8F9; }
-.hc-tag     { background: rgba(6,182,212,0.12); color: #67E8F9; border: 1px solid rgba(6,182,212,0.25); }
-.hc-title   { color: #67E8F9; }
-.hc-dot     { background: #06B6D4; }
-.hc-btn     { background: linear-gradient(135deg, #0369A1, #0F766E); }
-.hc-stat    { color: #67E8F9; }
-
-/* Transportation: Orange + Amber */
-.tr-header  { background: linear-gradient(135deg, #7C2D12 0%, #78350F 100%); }
-.tr-id      { color: #FDBA74; }
-.tr-tag     { background: rgba(249,115,22,0.12); color: #FDBA74; border: 1px solid rgba(249,115,22,0.25); }
-.tr-title   { color: #FDBA74; }
-.tr-dot     { background: #F97316; }
-.tr-btn     { background: linear-gradient(135deg, #C2410C, #B45309); }
-.tr-stat    { color: #FDBA74; }
-
-/* Construction: Yellow + Violet */
-.cn-header  { background: linear-gradient(135deg, #3B1702 0%, #2E1065 100%); }
-.cn-id      { color: #FDE68A; }
-.cn-tag     { background: rgba(234,179,8,0.12); color: #FDE68A; border: 1px solid rgba(234,179,8,0.25); }
-.cn-title   { color: #FDE68A; }
-.cn-dot     { background: #EAB308; }
-.cn-btn     { background: linear-gradient(135deg, #92400E, #5B21B6); }
-.cn-stat    { color: #FDE68A; }
-
-/* ── Footer ── */
-.portfolio-footer {
-    background: rgba(0,0,0,0.25);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 40px;
-    text-align: center;
-}
-
-.footer-repos {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-}
-
-.repo-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 9px;
-    padding: 9px 18px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #94A3B8;
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.repo-link:hover {
-    background: rgba(255,255,255,0.07);
-    color: #E2E8F0;
-    border-color: rgba(255,255,255,0.15);
-}
-
-.footer-credit {
-    font-size: 13px;
-    color: #475569;
-}
-
-.footer-credit a {
-    color: #6366F1;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-/* Responsive */
 @media (max-width: 900px) {
-    .agents-row { grid-template-columns: 1fr !important; }
-    .hero-wrap { padding: 48px 20px 40px; }
-    .domain-header { padding: 32px 20px 0; }
-    .agents-row { padding: 0 20px 48px; }
+    .agents-grid { grid-template-columns: 1fr !important; }
+    .hero-wrap, .domain-wrap { padding-left: 20px; padding-right: 20px; }
     .stTabs [data-baseweb="tab-list"] { padding: 0 20px !important; }
 }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ─── DATA ────────────────────────────────────────────────────────────────────
+# ─── SVG WORKFLOW BUILDER ─────────────────────────────────────────────────────
+
+def build_workflow_svg(steps: list, dc: tuple, agent_id: str) -> str:
+    """
+    Build a visual SVG flowchart.
+    dc = (decision_bg, decision_border, warn_bg, warn_text, warn_border)
+    steps = list of {"label", "type", "branches":[{"label","type","side_label"}]}
+    """
+    W = 280
+    NW = 188      # full-width node width
+    NH = 34       # node height
+    CX = W // 2  # 140
+    YGAP = 14    # gap between nodes (arrow space)
+    BW2 = 118    # branch node width (2-branch)
+    BW3 = 82     # branch node width (3-branch)
+
+    mid = "m" + agent_id.lower().replace("-", "")  # unique marker ID
+
+    # (bg, text, border, radius)
+    NODE_STYLES = {
+        "trigger":  ("#172554", "#7DD3FC", "#1D4ED8", 7),
+        "process":  ("#0F1629", "#94A3B8", "#1E293B", 7),
+        "ai":       ("#1E1247", "#C4B5FD", "#4338CA", 7),
+        "decision": (dc[0],     "#FFFFFF",  dc[1],    7),
+        "ok":       ("#052E16", "#4ADE80", "#166534", 7),
+        "warn":     (dc[2],     dc[3],     dc[4],    7),
+        "neutral":  ("#0F172A", "#475569", "#1E293B", 7),
+    }
+
+    # Small type label shown inside node (top-left corner tiny text)
+    TYPE_LABELS = {
+        "trigger":  "TRIGGER",
+        "process":  "STEP",
+        "ai":       "GPT-4o",
+        "decision": "ROUTE",
+        "ok":       "OUTPUT",
+        "warn":     "OUTPUT",
+        "neutral":  "OUTPUT",
+    }
+
+    def rect_node(x, y, w, h, ntype, label):
+        bg, fg, border, rx = NODE_STYLES[ntype]
+        # Type micro-label
+        type_lbl = TYPE_LABELS[ntype]
+        type_fg = {
+            "trigger": "#3B82F6", "process": "#334155", "ai": "#6D28D9",
+            "decision": "rgba(255,255,255,0.4)", "ok": "#166534",
+            "warn": "rgba(255,255,255,0.35)", "neutral": "#1E293B",
+        }.get(ntype, "#334155")
+
+        # Main label — split into 2 lines if long
+        words = label.split()
+        if len(label) <= 22 or len(words) <= 2:
+            lines = [label]
+        else:
+            mid_idx = len(words) // 2
+            lines = [" ".join(words[:mid_idx]), " ".join(words[mid_idx:])]
+
+        text_parts = []
+        if len(lines) == 1:
+            text_parts.append(
+                f'<text x="{x + w//2}" y="{y + h//2 + 4}" text-anchor="middle" '
+                f'fill="{fg}" font-size="10" font-family="Inter,sans-serif" font-weight="600">{lines[0]}</text>'
+            )
+        else:
+            text_parts.append(
+                f'<text x="{x + w//2}" y="{y + h//2 - 3}" text-anchor="middle" '
+                f'fill="{fg}" font-size="9.5" font-family="Inter,sans-serif" font-weight="600">{lines[0]}</text>'
+            )
+            text_parts.append(
+                f'<text x="{x + w//2}" y="{y + h//2 + 10}" text-anchor="middle" '
+                f'fill="{fg}" font-size="9.5" font-family="Inter,sans-serif" font-weight="600">{lines[1]}</text>'
+            )
+
+        rect = (
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" '
+            f'fill="{bg}" stroke="{border}" stroke-width="1"/>'
+        )
+        type_text = (
+            f'<text x="{x+6}" y="{y+8}" fill="{type_fg}" '
+            f'font-size="6.5" font-family="JetBrains Mono,monospace" font-weight="700">{type_lbl}</text>'
+        )
+        return rect + type_text + "".join(text_parts)
+
+    def arrow_line(x1, y1, x2, y2):
+        return (
+            f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+            f'stroke="rgba(255,255,255,0.2)" stroke-width="1.5" '
+            f'marker-end="url(#{mid})"/>'
+        )
+
+    def side_label(x, y, txt):
+        return (
+            f'<text x="{x}" y="{y}" text-anchor="middle" '
+            f'fill="#475569" font-size="8.5" font-family="Inter,sans-serif" '
+            f'font-weight="500" font-style="italic">{txt}</text>'
+        )
+
+    parts = []
+    y = 10
+
+    for i, step in enumerate(steps):
+        ntype = step["type"]
+        branches = step.get("branches", [])
+
+        if ntype == "decision" and branches:
+            # Draw decision node
+            parts.append(rect_node(CX - NW // 2, y, NW, NH, ntype, step["label"]))
+            dy = y  # decision node top
+
+            nb = len(branches)
+            branch_y = dy + NH + 28
+
+            if nb == 2:
+                lx = 10
+                rx = W - 10 - BW2
+                lcx = lx + BW2 // 2
+                rcx = rx + BW2 // 2
+
+                # Left branch arrow + label
+                parts.append(arrow_line(CX, dy + NH, lcx, branch_y))
+                sl = branches[0].get("side_label", "Yes")
+                parts.append(side_label(lcx, branch_y - 8, sl))
+                parts.append(rect_node(lx, branch_y, BW2, NH, branches[0]["type"], branches[0]["label"]))
+
+                # Right branch arrow + label
+                parts.append(arrow_line(CX, dy + NH, rcx, branch_y))
+                sr = branches[1].get("side_label", "No")
+                parts.append(side_label(rcx, branch_y - 8, sr))
+                parts.append(rect_node(rx, branch_y, BW2, NH, branches[1]["type"], branches[1]["label"]))
+
+                y = branch_y + NH + 8
+
+            elif nb == 3:
+                xs = [4, (W - BW3) // 2, W - 4 - BW3]
+                for bx, branch in zip(xs, branches):
+                    bcx = bx + BW3 // 2
+                    parts.append(arrow_line(CX, dy + NH, bcx, branch_y))
+                    sl = branch.get("side_label", "")
+                    parts.append(side_label(bcx, branch_y - 8, sl))
+                    parts.append(rect_node(bx, branch_y, BW3, NH, branch["type"], branch["label"]))
+                y = branch_y + NH + 8
+
+        else:
+            # Regular node
+            parts.append(rect_node(CX - NW // 2, y, NW, NH, ntype, step["label"]))
+            if i + 1 < len(steps):
+                parts.append(arrow_line(CX, y + NH, CX, y + NH + YGAP))
+            y += NH + YGAP
+
+    total_h = y + 6
+
+    svg = (
+        f'<svg viewBox="0 0 {W} {total_h}" xmlns="http://www.w3.org/2000/svg" '
+        f'style="width:100%;display:block;border-radius:10px;">'
+        f'<defs>'
+        f'<marker id="{mid}" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">'
+        f'<path d="M0,0 L0,6 L8,3 z" fill="rgba(255,255,255,0.3)"/>'
+        f'</marker>'
+        f'</defs>'
+        f'<rect width="{W}" height="{total_h}" fill="rgba(0,0,0,0.28)" rx="10"/>'
+        + "".join(parts)
+        + f'</svg>'
+    )
+    return svg
+
+
+# ─── DATA ─────────────────────────────────────────────────────────────────────
+
+# domain_colors = (decision_bg, decision_border, warn_bg, warn_text, warn_border)
+HC = ("#0C4A6E", "#0369A1", "#134E4A", "#5EEAD4", "#0D9488")
+TR = ("#7C2D12", "#C2410C", "#78350F", "#FCD34D", "#B45309")
+CN = ("#3B1702", "#B45309", "#2E1065", "#C4B5FD", "#7C3AED")
 
 AGENTS = {
     "healthcare": [
         {
             "id": "HC-1",
-            "name": "Patient Discharge & Care Continuity",
-            "trigger": "Webhook",
-            "trigger_label": "Live EHR Events",
-            "nodes": 8,
-            "saves": "14 hrs/week",
+            "name": "Patient Discharge &amp; Care Continuity",
+            "trigger": "Webhook", "trigger_label": "Live EHR Events",
+            "nodes": 8, "saves": "14 hrs/wk",
             "problem": "Hospitals have nurses manually reviewing hundreds of discharged patients every day. High risk patients slip through and end up back in the ER within 30 days.",
-            "built": "An agent that fires the moment a patient is discharged, scores their readmission risk with GPT-4o, and routes the right alert to the right person immediately.",
+            "built": "An agent that fires the moment a patient is discharged, scores their readmission risk with GPT-4o, and immediately routes the right alert to the right person.",
             "solved": "High risk patients now get a physician callback within hours. The care team gets a Slack message with everything they need before the patient even reaches home.",
-            "workflow": (
-                "EHR Discharge Event\n"
-                "       |\n"
-                "  Normalize Payload\n"
-                "       |\n"
-                " GPT-4o Risk Scoring\n"
-                "       |\n"
-                "   Risk Router\n"
-                "  /    |    \\\n"
-                "High  Med   Low\n"
-                " |           |\n"
-                "Alert      Log\n"
-                "MD+Slack  Care Plan"
-            ),
+            "workflow_steps": [
+                {"label": "EHR Discharge Event",   "type": "trigger"},
+                {"label": "Normalize Payload",       "type": "process"},
+                {"label": "GPT-4o Risk Assessment",  "type": "ai"},
+                {"label": "Risk Level Router", "type": "decision", "branches": [
+                    {"label": "Alert MD + Slack",  "type": "warn",    "side_label": "High Risk"},
+                    {"label": "Log Care Plan",      "type": "neutral", "side_label": "Low Risk"},
+                ]},
+            ],
+            "dc": HC,
             "companies": [
                 ("Kaiser Permanente", "post-discharge cardiac patient follow ups"),
-                ("HCA Healthcare", "CHF and COPD nurse callbacks on the same day"),
+                ("HCA Healthcare", "CHF and COPD nurse callbacks same day"),
                 ("Teladoc", "virtual follow up scheduling right at discharge"),
             ],
             "n8n_url": "https://aravind5.app.n8n.cloud/workflow/sTOHb8MdKbJ1w8tS",
@@ -614,28 +646,23 @@ AGENTS = {
         {
             "id": "HC-2",
             "name": "Insurance Prior Authorization Automation",
-            "trigger": "Webhook",
-            "trigger_label": "Auth Requests",
-            "nodes": 7,
-            "saves": "18 hrs/week",
-            "problem": "Doctors and admin staff spend over two hours daily filling out prior auth forms by hand. A patient needing surgery can wait two to three days just for paperwork.",
+            "trigger": "Webhook", "trigger_label": "Auth Requests",
+            "nodes": 7, "saves": "18 hrs/wk",
+            "problem": "Doctors spend over two hours daily filling out prior auth forms by hand. A patient needing surgery can wait two to three days just for paperwork to clear.",
             "built": "An agent that checks insurance eligibility, evaluates medical necessity with GPT-4o against payer criteria, and submits approved requests automatically.",
-            "solved": "Eligible prior auth requests go from submission to confirmation in under 30 seconds. If something is missing, the provider gets an email with exactly what to fix.",
-            "workflow": (
-                "Auth Request Webhook\n"
-                "       |\n"
-                " Check Eligibility\n"
-                "       |\n"
-                "GPT-4o Assessment\n"
-                "       |\n"
-                "  Criteria Met?\n"
-                "  Yes        No\n"
-                "   |          |\n"
-                "Submit   Notify\n"
-                "to Payer  Provider"
-            ),
+            "solved": "Eligible prior auth requests go from submission to confirmation in under 30 seconds. If something is missing, the provider gets a clear email on what to fix.",
+            "workflow_steps": [
+                {"label": "Auth Request Webhook",       "type": "trigger"},
+                {"label": "Check Insurance Eligibility","type": "process"},
+                {"label": "GPT-4o Medical Necessity",   "type": "ai"},
+                {"label": "Criteria Met?", "type": "decision", "branches": [
+                    {"label": "Submit to Payer",  "type": "ok",      "side_label": "Yes"},
+                    {"label": "Notify Provider",  "type": "neutral", "side_label": "No"},
+                ]},
+            ],
+            "dc": HC,
             "companies": [
-                ("UnitedHealth Group", "millions of ortho and imaging prior auths yearly"),
+                ("UnitedHealth Group", "millions of imaging and ortho prior auths yearly"),
                 ("Aetna / CVS Health", "routine outpatient procedure review automation"),
                 ("Epic Clinics", "trigger directly from Epic SmartForms"),
             ],
@@ -643,32 +670,27 @@ AGENTS = {
         },
         {
             "id": "HC-3",
-            "name": "Clinical Trial Recruitment & Screening",
-            "trigger": "Schedule",
-            "trigger_label": "Daily at 8am",
-            "nodes": 9,
-            "saves": "22 hrs/week",
-            "problem": "Research teams at pharma companies spend weeks going through patient charts by hand. By the time they find candidates, enrollment windows have often already closed.",
-            "built": "An agent that wakes up every morning, runs every patient through inclusion and exclusion criteria with GPT-4o, and sends personalized outreach emails the same day.",
+            "name": "Clinical Trial Recruitment &amp; Screening",
+            "trigger": "Schedule", "trigger_label": "Daily at 8am",
+            "nodes": 9, "saves": "22 hrs/wk",
+            "problem": "Research teams spend weeks going through patient charts by hand. By the time they find candidates, enrollment windows have often already closed.",
+            "built": "An agent that wakes up every morning, screens every patient through trial inclusion and exclusion criteria with GPT-4o, and sends personalized outreach the same day.",
             "solved": "Weeks of manual chart review now happens overnight. Research coordinators arrive each morning to a ready list of screened candidates with outreach already sent.",
-            "workflow": (
-                "  Daily 8am Trigger\n"
-                "        |\n"
-                " Fetch Active Patients\n"
-                "        |\n"
-                "  Split into Batches\n"
-                "        |\n"
-                "GPT-4o Trial Screening\n"
-                "        |\n"
-                " Eligible?  No\n"
-                "     |       |\n"
-                "  Email    Log\n"
-                "Outreach   CRM"
-            ),
+            "workflow_steps": [
+                {"label": "Daily 8am Scheduler",     "type": "trigger"},
+                {"label": "Fetch Active Patients",   "type": "process"},
+                {"label": "Split into Batches",      "type": "process"},
+                {"label": "GPT-4o Trial Screening",  "type": "ai"},
+                {"label": "Eligible?", "type": "decision", "branches": [
+                    {"label": "Send Outreach Email", "type": "ok",      "side_label": "Yes"},
+                    {"label": "Log to CRM",          "type": "neutral", "side_label": "No"},
+                ]},
+            ],
+            "dc": HC,
             "companies": [
                 ("Pfizer", "Phase III trial screening across partner clinics at scale"),
                 ("Medidata / Veeva", "pipe screening results into CTMS platforms"),
-                ("Johns Hopkins", "screen same patients across multiple concurrent trials"),
+                ("Johns Hopkins", "screen patients across multiple concurrent trials"),
             ],
             "n8n_url": "https://aravind5.app.n8n.cloud/workflow/jnaNp7WZAlQw6v8o",
         },
@@ -677,63 +699,48 @@ AGENTS = {
         {
             "id": "TR-4",
             "name": "Fleet Predictive Maintenance",
-            "trigger": "Schedule",
-            "trigger_label": "Every Hour",
-            "nodes": 8,
-            "saves": "26 hrs/week",
+            "trigger": "Schedule", "trigger_label": "Every Hour",
+            "nodes": 8, "saves": "26 hrs/wk",
             "problem": "Fleet operators find out about a truck problem when it breaks down on the side of the road. At that point a tow is needed and deliveries are already missed.",
-            "built": "An agent that pulls live telematics data every hour for every vehicle, feeds sensor readings and fault codes into GPT-4o, and schedules service before a failure happens.",
-            "solved": "Maintenance teams know about problems days before a breakdown. Service appointments get booked automatically and the fleet manager gets a Slack alert with repair details.",
-            "workflow": (
-                "  Hourly Trigger\n"
-                "       |\n"
-                " Fetch Fleet Telemetry\n"
-                "       |\n"
-                " Split into Batches\n"
-                "       |\n"
-                "GPT-4o DTC Analysis\n"
-                "       |\n"
-                " Maintenance Needed?\n"
-                "  Yes          No\n"
-                "   |            |\n"
-                "Schedule    Log\n"
-                "Service   Healthy\n"
-                "+ Slack"
-            ),
+            "built": "An agent that pulls live telematics data every hour, feeds sensor readings and fault codes into GPT-4o, and schedules service before a failure actually happens.",
+            "solved": "Maintenance teams know about problems days before a breakdown. Service gets booked automatically and the fleet manager gets a Slack alert with repair details.",
+            "workflow_steps": [
+                {"label": "Hourly Scheduler",       "type": "trigger"},
+                {"label": "Fetch Fleet Telemetry",  "type": "process"},
+                {"label": "Split into Batches",     "type": "process"},
+                {"label": "GPT-4o DTC Analysis",    "type": "ai"},
+                {"label": "Maintenance Needed?", "type": "decision", "branches": [
+                    {"label": "Schedule + Slack",  "type": "warn", "side_label": "Yes"},
+                    {"label": "Log Healthy",        "type": "ok",   "side_label": "No"},
+                ]},
+            ],
+            "dc": TR,
             "companies": [
                 ("Ryder System", "235,000+ commercial vehicles monitored continuously"),
-                ("Amazon Logistics", "last mile van health checks for same-day SLAs"),
+                ("Amazon Logistics", "last mile van health for same-day delivery SLAs"),
                 ("Werner Enterprises", "catch DTC codes early on long haul OTR routes"),
             ],
             "n8n_url": "https://aravind5.app.n8n.cloud/workflow/WXXRgxylUgXEykTx",
         },
         {
             "id": "TR-5",
-            "name": "Dynamic Route Optimization & Exception",
-            "trigger": "Schedule",
-            "trigger_label": "Every 15 Min",
-            "nodes": 9,
-            "saves": "30 hrs/week",
-            "problem": "When a storm hits, dispatchers at major carriers manually reroute drivers one by one. Customers have no idea a delivery is late until it just does not show up.",
+            "name": "Dynamic Route Optimization &amp; Exception",
+            "trigger": "Schedule", "trigger_label": "Every 15 Min",
+            "nodes": 9, "saves": "30 hrs/wk",
+            "problem": "When a storm hits, dispatchers manually reroute drivers one by one. Customers have no idea their delivery is late until it simply does not show up.",
             "built": "An agent that checks every active delivery every 15 minutes against live traffic and weather. GPT-4o suggests the best alternate route and notifies driver and customer.",
-            "solved": "Drivers get new instructions before they hit congestion. Customers get a heads up with a revised arrival time before they start calling in. No manual dispatch needed.",
-            "workflow": (
-                "Every 15 Minutes\n"
-                "       |\n"
-                "Fetch Active Deliveries\n"
-                "       |\n"
-                "Split into Batches\n"
-                "       |\n"
-                "Fetch Traffic + Weather\n"
-                "       |\n"
-                "GPT-4o Delay Assessment\n"
-                "       |\n"
-                "Significant Delay?\n"
-                " Yes          No\n"
-                "  |            |\n"
-                "Reroute    Log\n"
-                "Driver + Customer OK"
-            ),
+            "solved": "Drivers get new instructions before they hit congestion. Customers get a heads up with a revised arrival time before they ever start calling in.",
+            "workflow_steps": [
+                {"label": "Every 15 Minutes",         "type": "trigger"},
+                {"label": "Fetch Active Deliveries",  "type": "process"},
+                {"label": "Live Traffic + Weather",   "type": "process"},
+                {"label": "GPT-4o Delay Assessment",  "type": "ai"},
+                {"label": "Significant Delay?", "type": "decision", "branches": [
+                    {"label": "Reroute + Notify",  "type": "warn", "side_label": "Yes"},
+                    {"label": "Log On-Track",       "type": "ok",   "side_label": "No"},
+                ]},
+            ],
+            "dc": TR,
             "companies": [
                 ("UPS", "automated rerouting during peak season weather on I-95"),
                 ("DoorDash / Instacart", "real-time ETA corrections for same-day delivery"),
@@ -743,35 +750,27 @@ AGENTS = {
         },
         {
             "id": "TR-6",
-            "name": "Freight Exception & Carrier Resolution",
-            "trigger": "Schedule",
-            "trigger_label": "Every Hour",
-            "nodes": 8,
-            "saves": "20 hrs/week",
-            "problem": "Freight brokers get dozens of shipment exception notifications every hour. By the time a high value shipment gets escalated, it is often too late to avoid a penalty.",
+            "name": "Freight Exception &amp; Carrier Resolution",
+            "trigger": "Schedule", "trigger_label": "Every Hour",
+            "nodes": 8, "saves": "20 hrs/wk",
+            "problem": "Freight brokers get dozens of exception notifications every hour. By the time a high value shipment gets escalated, it is often too late to avoid a penalty.",
             "built": "An agent that checks every in-transit shipment with an exception, classifies severity with GPT-4o, opens a case, and alerts the account manager within the hour.",
-            "solved": "High value shipments never sit in an unread queue. Account managers are looped in the same hour an exception is detected. Customers get updates before they have to ask.",
-            "workflow": (
-                "  Hourly Trigger\n"
-                "        |\n"
-                "Fetch Exceptions\n"
-                "        |\n"
-                " Split into Batches\n"
-                "        |\n"
-                "GPT-4o Severity Class\n"
-                "        |\n"
-                "    Severity\n"
-                " /     |     \\\n"
-                "Crit  Std   Low\n"
-                " |     |     |\n"
-                "Case  Case  Log\n"
-                "Alert  Notify\n"
-                "AM   Customer"
-            ),
+            "solved": "High value shipments never sit in an unread queue. Account managers are looped in the same hour an exception is detected. Customers get updates before they ask.",
+            "workflow_steps": [
+                {"label": "Hourly Scheduler",        "type": "trigger"},
+                {"label": "Fetch Exceptions",        "type": "process"},
+                {"label": "GPT-4o Severity Class",   "type": "ai"},
+                {"label": "Exception Severity", "type": "decision", "branches": [
+                    {"label": "Alert AM",       "type": "warn",    "side_label": "Critical"},
+                    {"label": "Notify Customer","type": "neutral", "side_label": "Standard"},
+                    {"label": "Log Only",       "type": "ok",      "side_label": "Low"},
+                ]},
+            ],
+            "dc": TR,
             "companies": [
-                ("C.H. Robinson", "20M+ shipments per year, triage exceptions at scale"),
+                ("C.H. Robinson", "20M+ shipments/year, triage exceptions at scale"),
                 ("FedEx Freight", "same-hour alerts on high-value LTL exceptions"),
-                ("Amazon Freight", "B2B shipping exception updates before customers ask"),
+                ("Amazon Freight", "B2B exception updates before customers ask"),
             ],
             "n8n_url": "https://aravind5.app.n8n.cloud/workflow/trGcBqL5lylqqmjF",
         },
@@ -779,33 +778,25 @@ AGENTS = {
     "construction": [
         {
             "id": "C-7",
-            "name": "Site Safety Compliance & OSHA Reporting",
-            "trigger": "Schedule",
-            "trigger_label": "Daily",
-            "nodes": 8,
-            "saves": "16 hrs/week",
-            "problem": "Safety managers fill out OSHA forms by hand, often missing deadlines or filing the wrong form. A single missed serious violation can result in a fine up to $15,625.",
+            "name": "Site Safety Compliance &amp; OSHA Reporting",
+            "trigger": "Schedule", "trigger_label": "Daily",
+            "nodes": 8, "saves": "16 hrs/wk",
+            "problem": "Safety managers fill out OSHA forms by hand and often miss deadlines. A single missed serious violation can result in a fine of up to $15,625.",
             "built": "An agent that reads each day's inspection reports, checks violations against 29 CFR 1926 with GPT-4o, files the right form, and sends the PM a corrective action plan.",
-            "solved": "OSHA forms get filed on time every time. Project managers start each morning knowing which sites have violations, what the citations are, and what to fix by when.",
-            "workflow": (
-                "  Daily Trigger\n"
-                "       |\n"
-                "Fetch Inspections\n"
-                "       |\n"
-                "Split into Batches\n"
-                "       |\n"
-                "GPT-4o 29 CFR 1926\n"
-                "       |\n"
-                "OSHA Reportable?\n"
-                " Yes         No\n"
-                "  |           |\n"
-                "File OSHA  Log\n"
-                "Form + Alert Minor\n"
-                "PM        Violation"
-            ),
+            "solved": "OSHA forms get filed on time every time. Project managers start each morning knowing which sites have violations, what the citations are, and what to fix.",
+            "workflow_steps": [
+                {"label": "Daily Scheduler",         "type": "trigger"},
+                {"label": "Fetch Inspection Reports","type": "process"},
+                {"label": "GPT-4o vs 29 CFR 1926",  "type": "ai"},
+                {"label": "OSHA Reportable?", "type": "decision", "branches": [
+                    {"label": "File Form + Alert PM","type": "warn",    "side_label": "Yes"},
+                    {"label": "Log Violation",        "type": "neutral", "side_label": "No"},
+                ]},
+            ],
+            "dc": CN,
             "companies": [
                 ("Turner Construction", "1,500+ active sites, OSHA 300 logs kept current"),
-                ("Bechtel", "fall protection and PPE violations for same-day action"),
+                ("Bechtel", "fall protection violations flagged for same-day action"),
                 ("Procore Contractors", "pull inspections from Procore, push to OSHA system"),
             ],
             "n8n_url": "https://aravind5.app.n8n.cloud/workflow/yV1moFLC09gC4g6C",
@@ -813,66 +804,47 @@ AGENTS = {
         {
             "id": "C-8",
             "name": "Subcontractor Invoice Reconciliation",
-            "trigger": "Schedule",
-            "trigger_label": "Weekly",
-            "nodes": 10,
-            "saves": "28 hrs/week",
-            "problem": "Finance teams manually check subcontractor invoices line by line against Schedule of Values. It takes days, errors still happen, and overpayments are common.",
+            "trigger": "Schedule", "trigger_label": "Weekly",
+            "nodes": 10, "saves": "28 hrs/wk",
+            "problem": "Finance teams manually check subcontractor invoices against Schedule of Values line by line. It takes days, errors still happen, and overpayments are common.",
             "built": "An agent that pulls every pending invoice, fetches the matching contract SOV, and asks GPT-4o to verify every line item, retainage calculation, and compliance doc.",
-            "solved": "Overbilling gets caught before payment. Subs with missing lien waivers get a clear email explaining what is needed. The whole process goes from days to hours.",
-            "workflow": (
-                "Weekly Trigger\n"
-                "      |\n"
-                "Fetch Pending Invoices\n"
-                "      |\n"
-                "Split into Batches\n"
-                "      |\n"
-                "Fetch Contract SOV\n"
-                "      |\n"
-                "GPT-4o Reconciliation\n"
-                "      |\n"
-                " Approved?\n"
-                " Yes      No\n"
-                "  |        |\n"
-                "Create  Flag +\n"
-                "Payment Notify\n"
-                "Voucher   Sub"
-            ),
+            "solved": "Overbilling gets caught before payment goes out. Subs with missing lien waivers get a clear email explaining exactly what is needed. The process goes from days to hours.",
+            "workflow_steps": [
+                {"label": "Weekly Scheduler",       "type": "trigger"},
+                {"label": "Fetch Pending Invoices", "type": "process"},
+                {"label": "Fetch Contract SOV",     "type": "process"},
+                {"label": "GPT-4o Reconciliation",  "type": "ai"},
+                {"label": "Approved?", "type": "decision", "branches": [
+                    {"label": "Create Voucher",    "type": "ok",   "side_label": "Yes"},
+                    {"label": "Flag + Notify Sub", "type": "warn", "side_label": "No"},
+                ]},
+            ],
+            "dc": CN,
             "companies": [
                 ("Skanska USA", "billions in subcontractor payments verified consistently"),
-                ("Hensel Phelps", "Davis-Bacon certified payroll compliance on federal projects"),
-                ("Procore + Sage 300", "pull SOV from Procore, push vouchers into Sage ERP"),
+                ("Hensel Phelps", "Davis-Bacon certified payroll on federal projects"),
+                ("Procore + Sage 300", "pull SOV from Procore, push vouchers into Sage"),
             ],
             "n8n_url": "https://aravind5.app.n8n.cloud/workflow/lQhFarz4A38f2flj",
         },
         {
             "id": "C-9",
-            "name": "Material Procurement & Supply Forecasting",
-            "trigger": "Schedule",
-            "trigger_label": "Daily",
-            "nodes": 9,
-            "saves": "24 hrs/week",
-            "problem": "Project managers find out about material shortages when the crew shows up and there is nothing to work with. An idle trade crew costs between $1,800 and $3,000 per hour.",
-            "built": "An agent that runs every morning, checks upcoming material needs against current inventory, and asks GPT-4o to find gaps given supplier lead times. POs are created automatically.",
-            "solved": "Material gaps get caught 5 to 10 days before they become a site problem. Procurement teams have time to source and deliver without ever stopping work.",
-            "workflow": (
-                " Daily Trigger\n"
-                "      |\n"
-                "Fetch Schedules\n"
-                "+ Inventory\n"
-                "      |\n"
-                "Split by Project\n"
-                "      |\n"
-                "GPT-4o Cross-Ref\n"
-                "Needs vs Stock\n"
-                "      |\n"
-                "Critical Shortage?\n"
-                " Yes         No\n"
-                "  |           |\n"
-                "Create     Daily\n"
-                "Bulk POs  Summary\n"
-                "+ Alert PM to PM"
-            ),
+            "name": "Material Procurement &amp; Supply Forecasting",
+            "trigger": "Schedule", "trigger_label": "Daily",
+            "nodes": 9, "saves": "24 hrs/wk",
+            "problem": "Project managers find out about material shortages when the crew shows up and there is nothing to work with. An idle trade crew costs $1,800 to $3,000 per hour.",
+            "built": "An agent that runs every morning, checks upcoming material needs against inventory, and asks GPT-4o to find gaps given supplier lead times. POs are created automatically.",
+            "solved": "Material gaps get caught 5 to 10 days before they stop work on site. Procurement teams have time to source and deliver without ever stopping work.",
+            "workflow_steps": [
+                {"label": "Daily Scheduler",            "type": "trigger"},
+                {"label": "Fetch Schedules + Inventory","type": "process"},
+                {"label": "GPT-4o Cross-Reference",     "type": "ai"},
+                {"label": "Critical Shortage?", "type": "decision", "branches": [
+                    {"label": "Create POs + Alert PM", "type": "warn", "side_label": "Yes"},
+                    {"label": "Send Daily Summary",     "type": "ok",   "side_label": "No"},
+                ]},
+            ],
+            "dc": CN,
             "companies": [
                 ("Whiting Turner", "prevent steel and concrete shortages on high-rise builds"),
                 ("DPR Construction", "MEP material tracking for fast-track data center projects"),
@@ -886,176 +858,191 @@ AGENTS = {
 DOMAIN_META = {
     "healthcare": {
         "label": "Healthcare",
-        "tag_class": "hc-tag",
-        "title_class": "hc-title",
-        "header_class": "hc-header",
-        "id_class": "hc-id",
-        "dot_class": "hc-dot",
-        "btn_class": "hc-btn",
-        "stat_class": "hc-stat",
+        "tag": "hc-tag", "ttl": "hc-ttl", "hdr": "hc-hdr",
+        "id_cls": "hc-id", "dot": "hc-dot", "btn": "hc-btn", "val": "hc-val",
         "desc": "Three agents that automate patient discharge triage, insurance prior authorization, and clinical trial recruitment using GPT-4o and live EHR data.",
     },
     "transportation": {
         "label": "Transportation",
-        "tag_class": "tr-tag",
-        "title_class": "tr-title",
-        "header_class": "tr-header",
-        "id_class": "tr-id",
-        "dot_class": "tr-dot",
-        "btn_class": "tr-btn",
-        "stat_class": "tr-stat",
+        "tag": "tr-tag", "ttl": "tr-ttl", "hdr": "tr-hdr",
+        "id_cls": "tr-id", "dot": "tr-dot", "btn": "tr-btn", "val": "tr-val",
         "desc": "Three agents that predict fleet breakdowns, reroute deliveries in real time, and escalate freight exceptions by severity before account managers have to ask.",
     },
     "construction": {
         "label": "Construction",
-        "tag_class": "cn-tag",
-        "title_class": "cn-title",
-        "header_class": "cn-header",
-        "id_class": "cn-id",
-        "dot_class": "cn-dot",
-        "btn_class": "cn-btn",
-        "stat_class": "cn-stat",
+        "tag": "cn-tag", "ttl": "cn-ttl", "hdr": "cn-hdr",
+        "id_cls": "cn-id", "dot": "cn-dot", "btn": "cn-btn", "val": "cn-val",
         "desc": "Three agents that file OSHA reports automatically, reconcile subcontractor invoices against Schedule of Values, and forecast material shortages before they stop work on site.",
     },
 }
 
 
-# ─── RENDER HELPERS ──────────────────────────────────────────────────────────
+# ─── HTML BUILDERS ────────────────────────────────────────────────────────────
 
-def agent_card_html(agent: dict, meta: dict) -> str:
-    companies_html = "".join(
-        f"""<div class="uc-item">
-              <div class="uc-dot {meta['dot_class']}"></div>
-              <div class="uc-text"><span class="uc-co">{co}</span> — {desc}</div>
-            </div>"""
-        for co, desc in agent["companies"]
-    )
-
-    workflow_escaped = (
-        agent["workflow"]
+def esc(text: str) -> str:
+    return (
+        str(text)
         .replace("&", "&amp;")
         .replace("<", "&lt;")
         .replace(">", "&gt;")
+        .replace('"', "&quot;")
     )
 
-    return f"""
-<div class="agent-card">
-  <!-- Header -->
-  <div class="card-header {meta['header_class']}">
-    <div class="card-id {meta['id_class']}">{agent['id']}</div>
-    <div class="card-name">{agent['name']}</div>
-    <span class="trigger-pill">
-      <span class="trigger-dot"></span>
-      {agent['trigger']} · {agent['trigger_label']}
-    </span>
-  </div>
 
-  <!-- Body -->
-  <div class="card-body">
+def build_card(agent: dict, m: dict) -> str:
+    svg = build_workflow_svg(agent["workflow_steps"], agent["dc"], agent["id"])
 
-    <!-- Google XYZ -->
-    <div class="xyz-item">
-      <span class="xyz-label label-p">Problem</span>
-      <span class="xyz-text">{agent['problem']}</span>
-    </div>
-    <div class="xyz-item">
-      <span class="xyz-label label-b">Built</span>
-      <span class="xyz-text">{agent['built']}</span>
-    </div>
-    <div class="xyz-item">
-      <span class="xyz-label label-s">Solved</span>
-      <span class="xyz-text">{agent['solved']}</span>
-    </div>
+    companies_html = "".join(
+        f'<div class="uc-row">'
+        f'<div class="uc-dot {m["dot"]}"></div>'
+        f'<div class="uc-txt"><span class="uc-co">{esc(co)}</span> &mdash; {esc(desc)}</div>'
+        f'</div>'
+        for co, desc in agent["companies"]
+    )
 
-    <div class="card-divider"></div>
+    return (
+        f'<div class="agent-card">'
 
-    <!-- Workflow Diagram -->
-    <div class="workflow-box">{workflow_escaped}</div>
+        f'<div class="card-hdr {m["hdr"]}">'
+        f'<div class="card-id {m["id_cls"]}">{esc(agent["id"])}</div>'
+        f'<div class="card-name">{agent["name"]}</div>'
+        f'<span class="trigger-pill"><span class="t-dot"></span>'
+        f'{esc(agent["trigger"])} &middot; {esc(agent["trigger_label"])}</span>'
+        f'</div>'
 
-    <!-- Use Cases -->
-    <div class="uc-title">Real World Use Cases</div>
-    {companies_html}
+        f'<div class="card-body">'
 
-    <!-- Metrics -->
-    <div class="metrics-row">
-      <div class="metric-chip">
-        <span class="metric-val">{agent['nodes']}</span>
-        <span>nodes</span>
-      </div>
-      <div class="metric-chip">
-        <span class="metric-val {meta['stat_class']}">{agent['saves']}</span>
-        <span>saved</span>
-      </div>
-    </div>
+        f'<div class="xyz-row"><span class="xyz-lbl lp">Problem</span>'
+        f'<span class="xyz-txt">{esc(agent["problem"])}</span></div>'
+        f'<div class="xyz-row"><span class="xyz-lbl lb">Built</span>'
+        f'<span class="xyz-txt">{esc(agent["built"])}</span></div>'
+        f'<div class="xyz-row"><span class="xyz-lbl ls">Solved</span>'
+        f'<span class="xyz-txt">{esc(agent["solved"])}</span></div>'
 
-    <!-- n8n Link -->
-    <a class="n8n-btn {meta['btn_class']}" href="{agent['n8n_url']}" target="_blank">
-      View Live in n8n Cloud →
-    </a>
+        f'<div class="card-div"></div>'
 
-  </div>
-</div>
-"""
+        f'<div class="wf-label">How It Works</div>'
+        f'{svg}'
+
+        f'<div class="uc-title">Real World Use Cases</div>'
+        f'{companies_html}'
+
+        f'<div class="metrics-row">'
+        f'<div class="m-chip"><span class="m-val">{esc(str(agent["nodes"]))}</span>nodes</div>'
+        f'<div class="m-chip"><span class="m-val {m["val"]}">{esc(agent["saves"])}</span>saved</div>'
+        f'</div>'
+
+        f'<a class="n8n-btn {m["btn"]}" href="{esc(agent["n8n_url"])}" target="_blank">'
+        f'View Live in n8n Cloud &#8594;</a>'
+
+        f'</div>'
+        f'</div>'
+    )
 
 
-def render_domain_section(domain_key: str):
-    meta = DOMAIN_META[domain_key]
+def render_domain(domain_key: str):
+    m = DOMAIN_META[domain_key]
     agents = AGENTS[domain_key]
+    cards_html = "".join(build_card(a, m) for a in agents)
 
-    # Domain header
-    st.markdown(f"""
-    <div class="domain-header">
-      <div class="domain-tag {meta['tag_class']}">{meta['label']}</div>
-      <div class="domain-title">{meta['label']} AI Agents</div>
-      <div class="domain-desc">{meta['desc']}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # 3 cards in columns
-    cols = st.columns(3, gap="medium")
-    for col, agent in zip(cols, agents):
-        with col:
-            st.markdown(agent_card_html(agent, meta), unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
+    html = (
+        f'<div class="domain-wrap">'
+        f'<div class="domain-tag {m["tag"]}">{esc(m["label"])}</div>'
+        f'<div class="domain-title {m["ttl"]}">{esc(m["label"])} AI Agents</div>'
+        f'<div class="domain-desc">{esc(m["desc"])}</div>'
+        f'<div class="agents-grid">{cards_html}</div>'
+        f'</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 
-# ─── HERO ────────────────────────────────────────────────────────────────────
+# ─── PROFILE BAR ──────────────────────────────────────────────────────────────
 
-st.markdown("""
-<div class="hero-wrap">
-  <div class="hero-badge">n8n · GPT-4o · Production Ready</div>
-  <div class="hero-title">AI Agent Portfolio</div>
-  <div class="hero-subtitle">
-    9 production-grade workflow agents built on n8n and GPT-4o.
-    Each agent solves a real business problem across three industries —
-    fully automated, running live in the cloud.
-  </div>
-  <div class="tech-badges">
-    <span class="tech-badge"><span class="dot"></span>n8n Cloud</span>
-    <span class="tech-badge"><span class="dot" style="background:#10B981"></span>GPT-4o</span>
-    <span class="tech-badge"><span class="dot" style="background:#F97316"></span>Gmail + Slack</span>
-    <span class="tech-badge"><span class="dot" style="background:#8B5CF6"></span>Webhook + Schedule</span>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-box">
-      <span class="stat-num" style="background:linear-gradient(135deg,#fff,#A5B4FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">9</span>
-      <span class="stat-lbl">AI Agents</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num" style="background:linear-gradient(135deg,#fff,#67E8F9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3</span>
-      <span class="stat-lbl">Industries</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num" style="background:linear-gradient(135deg,#fff,#86EFAC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GPT-4o</span>
-      <span class="stat-lbl">Powered</span>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="profile-bar">'
+
+    # Left — name + subtitle + badge
+    '<div class="profile-left">'
+    '<div class="profile-name">ARAVIND KUMAR NALUKURTHI</div>'
+    '<div class="profile-title-tag">'
+    'AI Engineer &nbsp;&middot;&nbsp; Workflow Automation'
+    '<span class="sep">|</span>'
+    '&#128205; San Francisco, California'
+    '<span class="sep">|</span>'
+    '<span class="available-badge"><span class="av-dot"></span>Open to Opportunities</span>'
+    '</div>'
+    '</div>'
+
+    # Right — contact links
+    '<div class="profile-links">'
+    '<a class="p-link p-link-li" href="https://www.linkedin.com/in/aravind-kumar-nalukurthi-45b2a41b2/" target="_blank">'
+    '&#128101; LinkedIn'
+    '</a>'
+    '<a class="p-link p-link-gh" href="https://github.com/data-geek-astronomy" target="_blank">'
+    '&#9670; GitHub'
+    '</a>'
+    '<a class="p-link p-link-pf" href="https://data-geek-astronomy.github.io/-portfolio-website/" target="_blank">'
+    '&#9632; Portfolio'
+    '</a>'
+    '<a class="p-link p-link-em" href="mailto:aravind.kumar.nalukurthi@gmail.com">'
+    '&#9993; Email'
+    '</a>'
+    '<a class="p-link p-link-ph" href="tel:+14809311899">'
+    '480.931.1899'
+    '</a>'
+    '</div>'
+
+    '</div>',
+    unsafe_allow_html=True,
+)
 
 
-# ─── TABS ────────────────────────────────────────────────────────────────────
+# ─── HERO ─────────────────────────────────────────────────────────────────────
+
+st.markdown(
+    '<div class="hero-wrap">'
+    '<div class="hero-badge">n8n &middot; GPT-4o &middot; Production Ready</div>'
+    '<div class="hero-title">AI Agent Portfolio</div>'
+
+    # Catchy recruiter summary
+    '<div class="hero-summary-wrap">'
+    '<div class="hero-summary-eyebrow">Who I Am</div>'
+    '<div class="hero-summary-text">'
+    'I\'m an <strong>AI Engineer who builds workflow agents that solve real operational problems</strong> '
+    '&mdash; not demos, not prototypes, live systems running in the cloud. '
+    'I specialize in bringing AI into <strong>healthcare, logistics, and construction</strong>, '
+    'industries where automation still feels foreign and the wins are massive. '
+    'If your company has a manual process that should be automated, '
+    '<strong>I build the agent that does it</strong>.'
+    '</div>'
+    '</div>'
+
+    '<div class="tech-badges">'
+    '<span class="tech-badge"><span class="tb-dot" style="background:#6366F1"></span>n8n Cloud</span>'
+    '<span class="tech-badge"><span class="tb-dot" style="background:#10B981"></span>GPT-4o</span>'
+    '<span class="tech-badge"><span class="tb-dot" style="background:#F97316"></span>Gmail + Slack</span>'
+    '<span class="tech-badge"><span class="tb-dot" style="background:#8B5CF6"></span>Webhook + Schedule</span>'
+    '</div>'
+    '<div class="hero-stats">'
+    '<div class="stat-box">'
+    '<span class="stat-num" style="background:linear-gradient(135deg,#fff,#A5B4FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">9</span>'
+    '<span class="stat-lbl">AI Agents</span>'
+    '</div>'
+    '<div class="stat-box">'
+    '<span class="stat-num" style="background:linear-gradient(135deg,#fff,#67E8F9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3</span>'
+    '<span class="stat-lbl">Industries</span>'
+    '</div>'
+    '<div class="stat-box">'
+    '<span class="stat-num" style="background:linear-gradient(135deg,#fff,#86EFAC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GPT-4o</span>'
+    '<span class="stat-lbl">Powered</span>'
+    '</div>'
+    '</div>'
+    '</div>',
+    unsafe_allow_html=True,
+)
+
+
+# ─── TABS ─────────────────────────────────────────────────────────────────────
 
 tab_hc, tab_tr, tab_cn = st.tabs([
     "  Healthcare  ",
@@ -1064,37 +1051,32 @@ tab_hc, tab_tr, tab_cn = st.tabs([
 ])
 
 with tab_hc:
-    render_domain_section("healthcare")
+    render_domain("healthcare")
 
 with tab_tr:
-    render_domain_section("transportation")
+    render_domain("transportation")
 
 with tab_cn:
-    render_domain_section("construction")
+    render_domain("construction")
 
 
-# ─── FOOTER ──────────────────────────────────────────────────────────────────
+# ─── FOOTER ───────────────────────────────────────────────────────────────────
 
-st.markdown("""
-<div class="portfolio-footer">
-  <div class="footer-repos">
-    <a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-healthcare" target="_blank">
-      github / n8n-healthcare
-    </a>
-    <a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-transportation" target="_blank">
-      github / n8n-transportation
-    </a>
-    <a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-construction" target="_blank">
-      github / n8n-construction
-    </a>
-    <a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-ai-agents" target="_blank">
-      github / n8n-ai-agents (combined)
-    </a>
-  </div>
-  <div class="footer-credit">
-    Built by <a href="https://github.com/data-geek-astronomy" target="_blank">Aravind Kumar</a>
-    &nbsp;·&nbsp; n8n + GPT-4o &nbsp;·&nbsp; 9 agents live on
-    <a href="https://aravind5.app.n8n.cloud" target="_blank">n8n Cloud</a>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="portfolio-footer">'
+    '<div class="footer-repos">'
+    '<a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-healthcare" target="_blank">github/n8n-healthcare</a>'
+    '<a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-transportation" target="_blank">github/n8n-transportation</a>'
+    '<a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-construction" target="_blank">github/n8n-construction</a>'
+    '<a class="repo-link" href="https://github.com/data-geek-astronomy/n8n-ai-agents" target="_blank">github/n8n-ai-agents</a>'
+    '</div>'
+    '<div class="footer-credit">'
+    'Built by <a href="https://data-geek-astronomy.github.io/-portfolio-website/" target="_blank">Aravind Kumar Nalukurthi</a>'
+    ' &nbsp;&middot;&nbsp; San Francisco, CA &nbsp;&middot;&nbsp; '
+    '<a href="mailto:aravind.kumar.nalukurthi@gmail.com">aravind.kumar.nalukurthi@gmail.com</a>'
+    ' &nbsp;&middot;&nbsp; n8n + GPT-4o &nbsp;&middot;&nbsp; '
+    'Live on <a href="https://aravind5.app.n8n.cloud" target="_blank">n8n Cloud</a>'
+    '</div>'
+    '</div>',
+    unsafe_allow_html=True,
+)
