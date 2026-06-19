@@ -24,7 +24,25 @@ gh repo create "$REPO_NAME" \
 echo ""
 echo "Done! Repo live at: https://github.com/data-geek-astronomy/$REPO_NAME"
 echo ""
-echo "Next: Deploy on Streamlit Cloud"
+echo "=== Enabling GitHub Pages ==="
+gh api \
+  --method PUT \
+  -H "Accept: application/vnd.github+json" \
+  "/repos/data-geek-astronomy/$REPO_NAME/pages" \
+  -f "source[branch]=main" \
+  -f "source[path]=/" 2>/dev/null || \
+gh api \
+  --method POST \
+  -H "Accept: application/vnd.github+json" \
+  "/repos/data-geek-astronomy/$REPO_NAME/pages" \
+  -f "source[branch]=main" \
+  -f "source[path]=/" 2>/dev/null || true
+
+echo ""
+echo "GitHub Pages will be live in ~60 seconds at:"
+echo "  https://data-geek-astronomy.github.io/$REPO_NAME/"
+echo ""
+echo "Optional: Also deploy the Streamlit app"
 echo "  1. Go to https://share.streamlit.io"
 echo "  2. Click 'New app'"
 echo "  3. Select repo: data-geek-astronomy/$REPO_NAME"

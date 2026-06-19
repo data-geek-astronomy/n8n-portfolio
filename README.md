@@ -106,6 +106,15 @@ Each domain has its own repo with the workflow JSON files and a domain-specific 
 
 ---
 
+## Live Portfolio
+
+The portfolio has two live versions:
+
+- **GitHub Pages (static):** [data-geek-astronomy.github.io/ai-agent-portfolio](https://data-geek-astronomy.github.io/ai-agent-portfolio/) — pure HTML/CSS/JS, no server required
+- **Streamlit app:** deploy via [share.streamlit.io](https://share.streamlit.io) for the full Python version
+
+---
+
 ## Run This Portfolio App Locally
 
 ```bash
@@ -117,11 +126,20 @@ streamlit run app.py
 
 The app opens at `http://localhost:8501`.
 
+Or open `index.html` directly in any browser — no server needed.
+
 ---
 
 ## Deploy Your Own Copy
 
-This app deploys in under 2 minutes on Streamlit Community Cloud:
+**GitHub Pages (recommended — zero config):**
+
+1. Push this repo to GitHub
+2. Go to repo **Settings → Pages**
+3. Set Source to **Deploy from branch: main / root**
+4. Click **Save** — live in ~60 seconds at `https://your-username.github.io/ai-agent-portfolio/`
+
+**Streamlit Community Cloud:**
 
 1. Fork this repo to your GitHub account
 2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
